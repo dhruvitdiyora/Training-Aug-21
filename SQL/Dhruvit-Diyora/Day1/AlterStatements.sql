@@ -1,0 +1,11 @@
+ALTER TABLE JobHistory 
+ADD CONSTRAINT fk_job_id 
+FOREIGN KEY (JobId) 
+REFERENCES Jobs(JobId) 
+ON DELETE CASCADE;
+
+ALTER TABLE JobHistory
+DROP CONSTRAINT fk_job_id;
+
+ALTER TABLE JobHistory
+ADD Location varchar(255)
