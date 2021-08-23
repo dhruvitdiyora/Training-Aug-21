@@ -1,90 +1,131 @@
-create table  Customer(
-	Cname VARCHAR(19) NOT NULL PRIMARY KEY, 
-	City VARCHAR(18))
+USE[ProgDesc1708]
+CREATE TABLE Campus (CampusID VARCHAR(5) NOT NULL CONSTRAINT PK_Campus PRIMARY KEY (CampusID)
+, CampusName VARCHAR(30), Street VARCHAR(30), City VARCHAR(30), State VARCHAR(30), Zip INT, Phone VARCHAR(12), CampusDiscount DECIMAL (2,2))
 
-INSERT INTO Customer VALUES 
-	('Anil', 'Kolkata'),
-	('Sunil', 'Delhi'),
-	('Mehul', 'Baroa'),
-	('Mandar', 'Patna'),
-	('Madhuri', 'Nagpur'),
-	('Pramod', 'Nagpur'),
-	('Sandip', 'Surat'),
-	('Shivani', 'Mumbai'),
-	('Kranti', 'Mumbai'),
-	('Naren', 'Mumbai')
+CREATE TABLE Position (PositionID VARCHAR(5) NOT NULL CONSTRAINT PK_Position PRIMARY KEY (PositionID), Position VARCHAR(30), YearlyMembershipFee DECIMAL(7,2))
 
-CREATE TABLE Branch (
-	Bname VARCHAR(18) PRIMARY KEY NOT NULL, 
-	City VARCHAR(18))
+CREATE TABLE Members (MemberID VARCHAR(5) NOT NULL CONSTRAINT PK_Member PRIMARY KEY (MemberID), LastName VARCHAR(30), FirstName VARCHAR(30), CampusAddress VARCHAR(30), CampusPhone VARCHAR(12), CampusID VARCHAR(5) NOT NULL CONSTRAINT FK_Campus FOREIGN KEY REFERENCES Campus(CampusID), PositionID VARCHAR(5) NOT NULL CONSTRAINT FK_Position FOREIGN KEY REFERENCES Position(PositionID), ContractDuration INTEGER NOT NULL check (ContractDuration between 0 and 999))
 
-INSERT INTO Branch VALUES 
-	('VRCE','Nagpur'),
-	('AJNI', 'Nagpur'),
-	('KAROLBAGH', 'Delhi'),
-	('CHANDNI', 'Delhi'),
-	('DHARAMPETH', 'Nagpur'),
-	('M.G.ROAD', 'Banglore'),
-	('ANDHERI', 'Mumbai'),
-	('VIRAR', 'Mumbai'),
-	('NEHRU PLACE', 'Delhi'),
-	('POWAI', 'Mumbai')
+CREATE TABLE Prices (FoodItemTypeID INT NOT NULL CONSTRAINT PK_FIT_ID PRIMARY KEY (FoodItemTypeID), MealType VARCHAR(30), MealPrice DECIMAL (7,2))
+
+CREATE TABLE FoodItems 
+(FoodItemID VARCHAR(5) NOT NULL CONSTRAINT PK_FoodItem PRIMARY KEY (FooditemID),
+FoodItemName VARCHAR(30), 
+FoodItemTypeID INT NOT NULL CONSTRAINT FK_Price FOREIGN KEY REFERENCES Prices(FoodItemTypeID))
+
+CREATE TABLE Orders (OrderID VARCHAR(5) NOT NULL CONSTRAINT PK_Order
+PRIMARY KEY (OrderID),MemberID VARCHAR(5) NOT NULL CONSTRAINT FK_Members FOREIGN KEY REFERENCES Members(MemberID), OrderDate Date)
+     
+
+CREATE TABLE OrderLine (OrderID VARCHAR(5) FOREIGN KEY REFERENCES Orders(OrderID), FoodItemsID VARCHAR(5) FOREIGN KEY REFERENCES FoodItems(FoodItemID), Quantity INTEGER NOT NULL CHECK (Quantity between 0 and 999), CONSTRAINT Pk_Orderline PRIMARY KEY (OrderID,FoodItemsID))
+ 
+ 
+
+INSERT INTO Campus VALUES
+('1','IUPUI','425 University Blvd.','Indianapolis', 'IN','46202', '3172744591',.08),
+('2','Indiana University','107 S. Indiana Ave.','Bloomington', 'IN','47405', '8128554848',.07),
+('3','Purdue University','475 Stadium Mall Drive','West Lafayette', 'IN','47907', '7654941776',.06)
 
 
-CREATE TABLE Deposit (
-	ActNo VARCHAR (5) NOT NULL PRIMARY KEY, 
-	Cname VARCHAR (19) FOREIGN KEY REFERENCES Customer(Cname), 
-	Bname VARCHAR(18) FOREIGN KEY REFERENCES Branch(Bname), 
-	Amount INT, 
-	Adate DATE) 
+INSERT INTO Position VALUES
+('1','Lecturer', 1050.50),
+('2','Associate Professor', 900.50),
+('3','Assistant Professor', 875.50),
+('4','Professor', 700.75),
+('5','Full Professor', 500.50)
 
-INSERT INTO Deposit VALUES
-	(100,'ANIL','VRCE',1000,'1-Mar-1995'),
-	(101,'SUNIL','AJNI',5000,'4-Jan-1996'),
-	(102,'MEHUL','KAROLBAGH',3500,'17-Nov-1995'),
-	(104,'MADHURI','CHANDNI',1200,'17-Dec-1995'),
-	(105,'PRAMOD','M.G.ROAD',3000,'27-Mar-1996'),
-	(106,'SANDIP','ANDHERI',2000,'31-Mar-1996'),
-	(107,'SHIVANI','VIRAR',1000,'5-Sep-1995'),
-	(108,'KRANTI','NEHRU PLACE',5000,'2-Jul-1995'),
-	(109,'NAREN','POWAI',7000,'10-Aug-1995')
-
-
-CREATE TABLE Borrow(
-	LoanNo VARCHAR (5) NOT NULL PRIMARY KEY, 
-	Cname VARCHAR(19) FOREIGN KEY REFERENCES Customer(Cname), 
-	Bname VARCHAR(18) FOREIGN KEY REFERENCES Branch(Bname), 
-	Amount INT)
-
-INSERT INTO Borrow VALUES
-	(201,'ANIL','VRCE',1000),
-	(206,'MEHUL','AJNI',5000),
-	(311,'SUNIL','DHARAMPETH',3000),
-	(321,'MADHURI','ANDHERI',2000),
-	(375,'PRAMOD','VIRAR',8000),
-	(481,'KRANTI','NEHRU PLACE',3000)
+INSERT INTO Members VALUES
+('1','Ellen','Monk','009 Purnell', '812-123-1234', '2', '5', 12),
+('2','Joe','Brady','008 Statford Hall', '765-234-2345', '3', '2', 10),
+('3','Dave','Davidson','007 Purnell', '812-345-3456', '2', '3', 10),
+('4','Sebastian','Cole','210 Rutherford Hall', '765-234-2345', '3', '5', 10),
+('5','Michael','Doo','66CPeobody', '812-548-8956', '2', '1', 10),
+('6','Jerome','Clark','SL 220', '317-274-9766', '1', '1', 12),
+('7','Bob','House','ET 329', '317-278-9098', '1', '4', 10),
+('8','Bridget','Stanley','SI 234', '317-274-5678', '1', '1', 12),
+('9','Bradley','Wilson','334 Statford Hall', '765-258-2567', '3', '2', 10)
 
 
 
---task1- List Names of Customers who are Depositors and have Same Branch City as that of SUNIL
-SELECT D.Cname , D.Bname
-           From Deposit D JOIN Branch B ON D.Bname=B.Bname
-           Where B.City IN (SELECT Br.City FROM Deposit De JOIN Branch Br ON De.Bname=Br.Bname where De.Cname='Sunil')
-
---task2- List All the Depositors Having Depositors Having Deposit in All the Branches where SUNIL is Having Account
-SELECT D.Cname AS 'Name',d.Bname AS 'Branch' FROM Deposit D JOIN Branch B ON D.Bname=B.Bname WHERE D.Bname IN ( SELECT D.Bname FROM Deposit D JOIN Branch B ON D.Bname=B.Bname WHERE D.Cname='SUNIL')
-
-
---task3- List the Names of Customers Living in the City where the Maximum Number of Depositors are Located
-SELECT Cname FROM Customer  WHERE City IN (SELECT City  FROM (SELECT DENSE_RANK() OVER(ORDER BY COUNT(B.City) DESC) AS Rank, B.City, COUNT(B.City) AS 'Occurrence' FROM Deposit D JOIN Branch B ON D.Bname = B.Bname GROUP BY B.City) temp WHERE Rank = 1)
-
---task4- List Names of Borrowers Having Deposit Amount Greater than 1000 and Loan Amount Greater than 2000
-SELECT B.Cname,B.Amount FROM Borrow B JOIN Deposit D ON B.Cname=D.Cname WHERE D.Amount>1000 AND B.Amount>2000
+INSERT INTO Prices VALUES
+('1','Beer/Wine', 5.50),
+('2','Dessert', 2.75),
+('3','Dinner', 15.50), 
+('4','Soft Drink', 2.50),
+('5','Lunch', 7.25)
+SELECT * FROM Prices
 
 
---task5- List All the Customers Living in NAGPUR and Having the Branch City as MUMBAI or DELHI
-SELECT C.Cname FROM Customer C  JOIN Branch B  ON C.City=B.City WHERE C.City='Nagpur' AND B.City IN ('Mumbai','Delhi')
+INSERT INTO FoodItems VALUES
+('10001','Lager','1'),
+('10002','Red Wine','1'),
+('10003','White Wine','1'),
+('10004','Coke','4'),
+('10005','Coffee','4'),
+('10006','Chicken a la King','3'),
+('10007','Rib Steak','3'),
+('10008','Fish and Chips','3'),
+('10009','Veggie Delight','3'),
+('10010','Chocolate Mousse','3'),
+('10011','Carrot Cake','2'),
+('10012','Fruit Cup','2'),
+('10013','Fish and Chips','5'),
+('10014','Angus Beef Burger','5'),
+('10015','Cobb Salad','5')
 
 
---task6- Count the Number of Customers Living in the City where Branch is Located
-SELECT COUNT(C.Cname) AS 'Customers',C.City FROM Customer C WHERE C.City IN ( SELECT B.City FROM Branch B) GROUP BY C.City
+INSERT INTO Orders VALUES
+('1', '9', 'March 5, 2015'),
+('2', '8', 'March 5, 2015'),
+('3', '7', 'March 5, 2015'),
+('4', '6', 'March 7, 2015'),
+('5', '5', 'March 7, 2015'),
+('6', '4', 'March 10, 2015'),
+('7', '3', 'March 11, 2015'),
+('8', '2', 'March 12, 2015'),
+('9', '1', 'March 13, 2015')
+
+
+INSERT INTO OrderLine VALUES
+('1','10001',1),
+('1','10006',1),
+('1','10012',1),
+('2','10004',2),
+('2','10013',1),
+('2','10014',1),
+('3','10005',1),
+('3','10011',1),
+('4','10005',2),
+('4','10004',2),
+('4','10006',1),
+('4','10007',1),
+('4','10010',2),
+('5','10003',1),
+('6','10002',2),
+('7','10005',2),
+('8','10005',1),
+('8','10011',1),
+('9','10001',1)
+
+--task-1-Create a listing of all Faculty Members (First and Last), their Faculty Position and the University that they are affiliated with (Name), along with their Monthly_Dues (Calculated Field with a column alias). Sort the records in descending order by University and then by Faculty's last name in ascending order.  
+ SELECT CONCAT(M.FirstName, ' ', M.LastName) AS 'Name', P.Position, C.CampusName, (P.YearlyMembershipFee/12) AS 'Monthly Dues' 
+FROM (Members M JOIN Position P ON M.PositionID = P.PositionID) 
+	 JOIN Campus C ON M.CampusID = C.CampusID
+ORDER BY C.CampusName DESC, M.LastName ASC
+
+
+--task-2-Create a listing that shows the various food items that the faculty club serves (Name of the food item, type of food item and the price of the food item). Note: List no alcoholic beverages. Sort the records in ascending order by price. 
+SELECT f.FoodItemName AS 'Food Item Name', F.FoodItemTypeID, P.MealPrice AS 'Food Price' FROM FoodItems F JOIN Prices P on F.FoodItemTypeID=p.FoodItemTypeID WHERE P.MealType!='Beer/Wine' AND F.FoodItemID IN (SELECT DISTINCT FoodItemsID FROM OrderLine WHERE OrderID IN (SELECT OrderID FROM Orders WHERE MemberID IN ( select MemberID from Members))) order by MealPrice ASC
+SELECT F.FoodItemName AS 'Food Item Name', P.MealType AS 'Food Type', P.MealPrice AS 'Food Price' FROM FoodItems F JOIN Prices P ON F.FoodItemTypeID = P.FoodItemTypeID WHERE P.MealType != 'Beer/Wine' ORDER BY P.MealPrice ASC
+
+
+--task-3-List the OrderID, Order Date, Faculty Member's Name, Campus Name, each FoodItem that makes up a given order, the type of meal, cost of the meal, quantity ordered and the total line total (calculated field and column alias). Sort by Order IDs in descending order.
+SELECT O.OrderID, O.OrderDate, CONCAT(M.FirstName, ' ', M.LastName) AS 'Name', CampusName AS 'Campus Name', FoodItemName AS 'Food Item Name', P.MealType AS 'Meal Type', P.MealPrice, OL.Quantity, P.MealPrice * OL.Quantity AS 'Total'
+FROM (((((Orders O JOIN Members M ON O.MemberID = M.MemberID)
+	 JOIN Campus C ON M.CampusID = C.CampusID) 
+	 JOIN OrderLine OL ON O.OrderID = OL.OrderID)
+	 JOIN FoodItems F ON OL.FoodItemsID = F.FoodItemID)
+	 JOIN Prices P ON F.FoodItemTypeID = P.FoodItemTypeID)
+ORDER BY O.OrderID DESC
+
+

@@ -23,6 +23,6 @@ CommisionPer DECIMAL(4,2) NULL
 );
 INSERT INTO Inventory VALUES ('Audi',835689.00),('TATA',296588.00),('Hyundai',895672.00),('Suzuki',589742.00),('Tesla',85285);
 
-insert INTO Employee values ('dhruvit','diyora','Sales',12.20),('leo','messi','Manager',10.00),('sergio','ramos','marketing',2.20),('kylian','mbappe','Sales',12.20);
+INSERT INTO Employee VALUES ('dhruvit','diyora','Sales',12.20),('leo','messi','Manager',10.00),('sergio','ramos','marketing',2.20),('kylian','mbappe','Sales',12.20);
 
-insert into Sales values (2,3),(2,2),(3,2),(2,5);
+INSERT INTO Sales VALUES (2,3),(2,2),(3,2),(2,5);
