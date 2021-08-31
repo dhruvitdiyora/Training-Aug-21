@@ -16,8 +16,8 @@ INSERT INTO Employee VALUES ('John', 'Abraham', 1000000, '2013-01-01', 'Banking'
                            ('Tom', 'Jose', 600000, '2013-02-01', 'Insurance', 2), 
                            ('Jerry', 'Pinto', 650000, '2013-02-01', 'Insurance', 3), 
                            ('Philip', 'Mathew', 750000, '2013-01-01', 'Services', 3), 
-                           ('TestNmae1', '123', 650000, '2013-01-01', 'Services', 2), 
-                           ('TestNmae2', 'Lname%', 600000, '2013-02-01', 'Insurance', 2)
+                           ('TestName1', '123', 650000, '2013-01-01', 'Services', 2), 
+                           ('TestName2', 'Lname%', 600000, '2013-02-01', 'Insurance', 2)
 
 
 SELECT * FROM Employee
