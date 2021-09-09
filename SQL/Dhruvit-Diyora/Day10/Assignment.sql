@@ -5,12 +5,39 @@ SET NOCOUNT ON
 DECLARE @Id INT, @Name VARCHAR(50), @Salary INT
 
 DECLARE Employee_Cursor CURSOR
+DYNAMIC FOR
+SELECT EmployeeId,FirstName,Salary FROM Employees 
+
+OPEN Employee_Cursor
+FETCH FROM Employee_Cursor INTO @Id,@Name,@Salary
+WHILE @@FETCH_STATUS = 0 
+BEGIN
+-- do update operation
+UPDATE Employees 
+SET Salary= CASE 
+                  WHEN @Salary BETWEEN 10000 AND 20000 THEN Salary + 5000
+				  WHEN @Salary BETWEEN 20000 AND 25000 THEN Salary + 7000
+				  WHEN @Salary BETWEEN 25000 AND 30000 THEN Salary + 9000
+                  ELSE @Salary
+                  END
+WHERE CURRENT OF Employee_Cursor 
+-- get next available row into variables
+FETCH NEXT FROM Employee_Cursor INTO @Id,@Name,@Salary
+END
+CLOSE Employee_Cursor
+Deallocate Employee_Cursor
+
+--another way
+SET NOCOUNT ON
+DECLARE @Id INT, @Name VARCHAR(50), @Salary INT
+
+DECLARE Employee_Cursor CURSOR
 STATIC FOR
 SELECT  EmployeeId,FirstName,Salary FROM Employees 
 OPEN Employee_Cursor
 IF @@CURSOR_ROWS > 0
 BEGIN
-FETCH NEXT FROM Employee_Cursor INTO @Id,@Name,@Salary
+FETCH FROM Employee_Cursor INTO @Id,@Name,@Salary
 WHILE @@FETCH_STATUS = 0 
 WHILE @Id<=15
 BEGIN
