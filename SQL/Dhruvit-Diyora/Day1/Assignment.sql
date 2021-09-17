@@ -2,8 +2,8 @@
 
 CREATE TABLE Inventory(
 ProductId INT PRIMARY KEY Identity(1,1),
-ProdName varchar(50) NOT NULL,
-ProdPrice decimal(8,2) NOT NULL,
+ProdName VARCHAR(50) NOT NULL,
+ProdPrice DECIMAL(8,2) NOT NULL,
 );
 CREATE TABLE Sales(
 SalesId INT PRIMARY KEY Identity(1,1),

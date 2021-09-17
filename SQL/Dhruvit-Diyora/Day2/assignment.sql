@@ -3,7 +3,7 @@
 
 ALTER TABLE Employees DROP CONSTRAINT ukEmail
 
-update Employees SET Email='not available'
+UPDATE Employees SET Email='not available'
 
 --task2-Write a SQL statement to change the Email and CommissionPct column of employees table with ‘not available’ and 0.10 for all employees.
 

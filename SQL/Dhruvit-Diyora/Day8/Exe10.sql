@@ -22,7 +22,7 @@ SELECT DATEDIFF(YEAR,'2000-08-31',GETDATE())
 --task-7. Write a query to get the current date in the following format. 
 --Sample date : 2014-09-04
 --Output : September 4, 2014
-SELECT FORMAT (GETDATE(), 'hh:mm tt MMM dd, yyyy') AS TIME
+SELECT FORMAT(GETDATE(), 'hh:mm tt MMM dd, yyyy') AS TIME
 
 --task-8. Write a query to get the current date in the following format. 
 --Thursday September 2014
