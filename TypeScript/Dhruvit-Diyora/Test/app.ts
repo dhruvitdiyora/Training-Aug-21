@@ -2,6 +2,7 @@ import * as models from "./model";
 
 var restaurants: Array<models.Restaurants> = [{restaurantId:1,resName:"res1"},{restaurantId:2,resName:"res2"},{restaurantId:3,resName:"res3"}];
 var tables: Array<models.Tables> = [{tableId:1,restaurantId:1,tableNumber:1,maxGuests:4},{tableId:2,restaurantId:1,tableNumber:2,maxGuests:8},{tableId:3,restaurantId:1,tableNumber:3,maxGuests:2},{tableId:4,restaurantId:2,tableNumber:1,maxGuests:4},{tableId:5,restaurantId:2,tableNumber:2,maxGuests:8},{tableId:6,restaurantId:2,tableNumber:3,maxGuests:1},{tableId:7,restaurantId:2,tableNumber:4,maxGuests:4},{tableId:8,restaurantId:3,tableNumber:1,maxGuests:4}];
+
 var reservations: Array<models.Reservations> = [];
 
 
