@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="text-center mt-5" style="margin-top: 70px">
+    <h1>Day 8 Practice</h1>
+    <h2>Passing Data between components</h2>
+    <div class="mt-5 p-3 content">
+      <div class="row">
+        <div class="col-xl-6 border border-3">
+          <h3 class="my-5">Using event</h3>
+          <button class="btn btn-success" (click)="increment()">
+            Increment
+          </button>
+          <button class="btn btn-danger mx-3" (click)="decrement()">
+            decrement
+          </button>
+          <app-child-component
+            [count]="Counter"
+            [item]="currentItem"
+            (countChanged)="countChangedHandler($event)"
+            (newItemEvent)="addItem($event)"
+          ></app-child-component>
+          <ul>
+            <li *ngFor="let item of items">{{ item }}</li>
+          </ul>
+        </div>
+        <div class="col-xl-6 border border-3">
+          <h3 class="my-5">Using child component id</h3>
+          <p>current count is {{ child.count }}</p>
+          <button class="btn btn-success" (click)="child.increment()">
+            Increment
+          </button>
+          <button class="btn btn-danger mx-3" (click)="child.decrement()">
+            decrement
+          </button>
+          <app-child-component #child></app-child-component>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<h2 class="my-5">Child Component</h2>
+<button class="btn btn-success" (click)="increment()">Increment</button>
+<button class="btn btn-danger mx-3" (click)="decrement()">decrement</button>
+<br />
+<h3 class="my-5">current count is {{ count }}</h3>
+<p>Today's item: {{ item }}</p>
+<label for="item-input">Add an item:</label>
+<input type="text" id="item-input" #newItem />
+<button (click)="addNewItem(newItem.value)">Add to parent's list</button>

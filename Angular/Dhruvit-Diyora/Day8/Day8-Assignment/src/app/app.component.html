@@ -1,0 +1,209 @@
+<div class="container">
+    <app-assignment (formData)="eventHandler($event)" [inputFormData]=data></app-assignment>
+    <div class="row border" *ngIf="data.length>0">
+        <h2 class="text-center mb-4">Student Data(from child)</h2>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 33%" scope="col">Student</th>
+                    <th style="width: 33%" scope="col">Father</th>
+                    <th style="width: 33%" scope="col">Mother</th>
+                    <!-- <th style="width: 20%" scope="col">Emergency Contact</th>
+                    <th style="width: 20%" scope="col">References</th> -->
+                </tr>
+            </thead>
+            <tbody *ngFor="let s of data; let i=index;">
+                <tr>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <td>
+                                    {{s.FirstName + ' ' + s.MiddleName +' ' + s.LastName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    DOB
+                                </th>
+                                <td>
+                                    {{s.Dob}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    PlaceOfBirth
+                                </th>
+                                <td>
+                                    {{s.Dob}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    FirstLanguage
+                                </th>
+                                <td>
+                                    {{s.FirstLanguage}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Address
+                                </th>
+                                <td>
+                                    {{s.Address.City + ' '+s.Address.State + ' '+s.Address.Country + ' '+s.Address.Pin}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <td>
+                                    {{s.Father.FFirstName + ' ' + s.Father.FMiddleName +' ' + s.Father.FLastName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Email
+                                </th>
+                                <td>
+                                    {{s.Father.FEmail}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Education Qualification
+                                </th>
+                                <td>
+                                    {{s.Father.FQualification}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Profession
+                                </th>
+                                <td>
+                                    {{s.Father.FProfession}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Designation
+                                </th>
+                                <td>
+                                    {{s.Father.FDesignation}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Phone
+                                </th>
+                                <td>
+                                    {{s.Father.FPhone}}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <td>
+                                    {{s.Mother.MFirstName + ' ' + s.Mother.MMiddleName +' ' + s.Mother.MLastName}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Email
+                                </th>
+                                <td>
+                                    {{s.Mother.MEmail}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Education Qualification
+                                </th>
+                                <td>
+                                    {{s.Mother.MQualification}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Profession
+                                </th>
+                                <td>
+                                    {{s.Mother.MProfession}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Designation
+                                </th>
+                                <td>
+                                    {{s.Mother.MDesignation}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Phone
+                                </th>
+                                <td>
+                                    {{s.Mother.MPhone}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+
+                            <thead>
+                                <tr>
+                                    <th>Relation</th>
+                                    <th>Number</th>
+                                </tr>
+
+                            </thead>
+                            <tbody *ngFor="let e of s.EmergancyContactList; let xy=index;">
+                                <tr>
+                                    <td>{{e.Relation}}</td>
+                                    <td> {{e.Number}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Reference Through</th>
+                                    <th>Address</th>
+                                    <th>RefsNumber</th>
+                                </tr>
+
+                            </thead>
+                            <tbody *ngFor="let r of s.References; let yz=index;">
+                                <tr>
+                                    <td>{{r.ReferenceThrough}}</td>
+                                    <td> {{r.Address}} </td>
+                                    <td>{{r.RefsNumber}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
