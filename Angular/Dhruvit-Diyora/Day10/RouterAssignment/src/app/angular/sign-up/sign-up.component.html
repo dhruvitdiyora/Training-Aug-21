@@ -1,0 +1,45 @@
+<hr />
+<div class="container" style="margin-top: 30px">
+  <h4 class="text-center">Sign Up</h4>
+
+  <div class="form-group row">
+    <label for="length" class="col-sm-2"> Enter Name </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" [(ngModel)]="name" id="length" />
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <label for="address" class="col-sm-2"> Enter Address </label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="address"
+        id="address"
+      />
+    </div>
+  </div>
+  <div class="form-group row mt-2">
+    <label for="pan" class="col-sm-2"> Enter PAN </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" [(ngModel)]="pan" id="pan" />
+    </div>
+  </div>
+  <br />
+
+  <div class="text-center">
+    <button
+      type="button"
+      class="btn btn-primary text-center"
+      (click)="display()"
+    >
+      Display
+    </button>
+  </div>
+
+  <div class="form-group text-center mt-3">
+    <p>
+      Details: <span class="ans">{{ answer }}</span>
+    </p>
+  </div>
+</div>

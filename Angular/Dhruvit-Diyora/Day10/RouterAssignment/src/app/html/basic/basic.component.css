@@ -1,0 +1,20 @@
+
+p { 
+  display: block;
+  align-items: center;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.error-message img {
+  width: 100px;
+  align-self: center;
+}
+
+
+
+

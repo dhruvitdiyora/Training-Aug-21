@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
+    <div class="container">
+
+        <a class="navbar-brand img-fluid"><img src="../assets/logo.png" routerLink="/home" alt="logo" height="80px"
+                width="80px"></a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse show" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item px-3">
+                    <a class="nav-link active" routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item  px-3">
+                    <a class="nav-link" routerLink="/html">HTML</a>
+                </li>
+                <li class="nav-item ml-5">
+                    <a class="nav-link" routerLink="/angular">Angular</a>
+                </li>
+
+
+            </ul>
+            <div class="alert alert-danger" role="alert" *ngIf="message">
+                {{ message }}
+            </div>
+
+            <form class="d-flex ml-5" *ngIf="!authService.getUser()">
+                <input class="form-control me-2" type="text" placeholder="Username" name="username" #username />
+                <input class="form-control me-2" type="password" name="password" placeholder="Password" #password />
+                <button class="btn btn-primary" type="submit"
+                    (click)="login(username.value, password.value)">Login</button>
+            </form>
+            <div class="well" *ngIf="authService.getUser()">
+                Logged in as <b>{{ authService.getUser() }} - </b>
+                <a href (click)="logout()">Log out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
