@@ -10,7 +10,7 @@ var emp: empData[] = [{ Id: 1, Name: "dhruvit", City: "surat", DOJ: new Date("20
 
 function searchEmp(id: number): void {
     emp.forEach(element => {
-        if (element.Id = id) {
+        if (element.Id == id) {
             console.log(`ID ${element.Id} \n Name ${element.Name} \n City ${element.City} \n DOJ ${element.DOJ}`);
         }
         

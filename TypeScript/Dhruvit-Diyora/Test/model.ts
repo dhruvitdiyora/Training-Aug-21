@@ -28,7 +28,4 @@ export interface Reservations{
     date: Date;
     reserved: Boolean;
     token?: string;
-
-    
-
 }

@@ -1,0 +1,117 @@
+<br />
+
+<div class="text-center mt-5" style="margin-top: 70px">
+  <h1>Day 3 Practice</h1>
+  <div class="row">
+    <div class="mt-5 p-3 content">
+      <div class="row">
+        <div class="col-xl-4">
+          <h3 class="mb-4">ngModel</h3>
+
+          <div class="form-group row">
+            <label for="something" class="col-sm-2"> write </label>
+            <div class="col-sm-10">
+              <input
+                placeholder="Write something here"
+                type="text"
+                class="form-control"
+                [(ngModel)]="something"
+                id="something"
+              />
+            </div>
+          </div>
+          <div class="form-group text-center mt-3">
+            <p>
+              something is: <span class="ans">{{ something }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-xl-4">
+          <h3 class="mb-4">ngFor</h3>
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">City</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of employees">
+                <td scope="row">{{ e.Id }}</td>
+                <td>{{ e.Name }}</td>
+                <td>{{ e.City }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xl-4">
+          <h3 class="mb-4">ngIf</h3>
+
+          <button (click)="ngIf()" class="btn btn-primary">Heyy</button>
+          <h3 *ngIf="choice" class="fw-bolder">Suprise!!!!</h3>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-xl-4">
+          <hr />
+          <h3 class="mb-4">ngClass</h3>
+
+          <p
+            [ngClass]="[
+              'btn',
+              'text-decoration-underline',
+              'text-success',
+              'mb-3'
+            ]"
+          >
+            Array
+          </p>
+          <br />
+          <button
+            [ngClass]="{
+              btn: true,
+              'btn-primary': true,
+              'mb-3': true
+            }"
+          >
+            usingObject</button
+          ><br />
+          <button [ngClass]="ngClass()">ngClass using function</button>
+        </div>
+        <div class="col-xl-4">
+          <hr />
+          <h3 class="mb-4">ngStyle</h3>
+
+          <!-- we can pass style as a string also in below line -->
+          <button [ngStyle]="ngStyle()">ngStyle</button>
+          <br />
+          <p
+            [ngStyle]="{
+              'font-weight': 'bolder',
+              color: 'blue',
+              'background-color': 'lightblue',
+              'margin-bottom.px': 10
+            }"
+          >
+            Hello my name is dhruvit
+          </p>
+        </div>
+        <div class="col-xl-4">
+          <hr />
+          <h3 class="mb-4">ngSwitch</h3>
+          <div *ngFor="let id of ids">
+            Id is {{ id }}
+            <div ngSwitch="{{ id % 2 }}">
+              <div *ngSwitchCase="'0'" [ngClass]="'one'">I am Even.</div>
+              <div *ngSwitchCase="'1'" [ngClass]="'two'">I am Odd.</div>
+              <div *ngSwitchDefault>Nothing Found.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

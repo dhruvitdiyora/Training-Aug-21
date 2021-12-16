@@ -1,16 +1,13 @@
-"use strict";
-//
-/// <reference path="./StringUtility.js" />
-exports.__esModule = true;
-exports.Employee = void 0;
-var Employee = /** @class */ (function () {
-    function Employee(name, code) {
-        this.empCode = code;
-        this.empName = StringUtility.SubString(name);
+//creating namespace
+var StringUtility;
+(function (StringUtility) {
+    function ToCapital(str) {
+        return str.toUpperCase();
     }
-    Employee.prototype.displayEmployee = function () {
-        console.log("Employee Code: " + this.empCode + ", Employee Name: " + this.empName);
-    };
-    return Employee;
-}());
-exports.Employee = Employee;
+    StringUtility.ToCapital = ToCapital;
+    function SubString(str, from, length = 0) {
+        return str.substr(from, length);
+    }
+    StringUtility.SubString = SubString;
+})(StringUtility || (StringUtility = {}));
+//tsc --outFile C:\MyTypeScriptNameSpaces\StringUtility.js C:\MyTypeScriptNameSpaces\StringUtility.ts
