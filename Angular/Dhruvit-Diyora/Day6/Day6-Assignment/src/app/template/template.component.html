@@ -1,0 +1,94 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+    <div class="form-group row">
+        <label for="firstname" class="col-sm-2"> First Name </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="firstname" #fname="ngModel" ngModel />
+        </div>
+    </div>
+
+    <pre>Value    : {{fname.value}} </pre>
+    <pre>valid    : {{fname.valid}} </pre>
+    <pre>invalid  : {{fname.invalid}} </pre>
+    <pre>touched  : {{fname.touched}} </pre>
+
+
+    <div class="form-group row mt-2">
+        <label for="lastname" class="col-sm-2"> Last Name </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="lastname" ngModel />
+        </div>
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="email" class="col-sm-2"> Email </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="email" name="email" ngModel />
+        </div>
+    </div>
+    <div class="form-check row">
+        <div class="col-12">
+
+            <label for="gender" class="col-sm-2"> Gender </label>
+            <div class="col-12">
+                <label class="form-check-label">
+
+                    <input type="radio" class="form-check-input" value="male" name="gender" ngModel>Male
+                </label>
+                <label class="mx-5 form-check-label">
+
+                    <input type="radio" class="form-check-input" value="female" name="gender" ngModel>Female
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-check row mt-2">
+        <div class="col-12">
+
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" ngModel>isMarried
+            </label>
+        </div>
+
+    </div>
+
+    <div class="form-group row mt-2">
+        <label for="email" class="col-sm-2"> Country </label>
+        <div class="col-sm-10">
+            <select name="country" class="form-control" ngModel>
+
+                <option [ngValue]="c.id" *ngFor="let c of countryList">
+                    {{c.name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div ngModelGroup="address">
+
+        <div class="form-group row mt-2">
+            <label for="city" class="col-sm-2"> City</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="city" ngModel />
+            </div>
+        </div>
+        <div class="form-group row mt-2">
+            <label for="street" class="col-sm-2"> Street</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="street" ngModel />
+            </div>
+        </div>
+        <div class="form-group row mt-2">
+            <label for="pincode" class="col-sm-2"> Pin Code</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="pincode" ngModel />
+            </div>
+        </div>
+
+    </div>
+
+    <p>
+        <button class="btn btn-primary mt-2" type="submit">Submit</button>
+    </p>
+
+</form>

@@ -1,0 +1,23 @@
+{{ model | json }}
+<div class="row">
+  <label class="col-sm-2" for="name">Name </label>
+  <div class="col-sm-10">
+    <input class="form-control" type="text" id="name" [(ngModel)]="model.name" name="name" />
+  </div>
+</div>
+
+<div class="row">
+  <label class="col-sm-2" for="alterEgo">Alter Ego </label>
+  <div class="col-sm-10">
+    <input class="form-control" type="text" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo" />
+  </div>
+</div>
+
+<div class="row">
+  <label class="col-sm-2" for="power">Hero Power </label>
+  <div class="col-sm-10">
+    <select class="form-control" type="text" id="alterEgo" [(ngModel)]="model.power" name="power">
+      <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+    </select>
+  </div>
+</div>
